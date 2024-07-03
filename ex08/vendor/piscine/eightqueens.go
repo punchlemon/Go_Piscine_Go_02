@@ -14,13 +14,12 @@ func printSolution(z []rune) {
 	Println(string(z))
 }
 
-func solveNQueens(z []rune, x int, cnt *int) {
-	if x == N {
+func solveNQueens(z []rune, x int, n int) {
+	if x == n {
 		printSolution(z)
-		*cnt++
 		return
 	}
-	for i := 0; i < N; i++ {
+	for i := 0; i < n; i++ {
 		valid := true
 		for j := 0; j < x; j++ {
 			if z[j] == rune(i+'0') || z[j]-rune(i+'0') == rune(x-j) || z[j]-rune(i+'0') == rune(-(x-j)) {
@@ -30,14 +29,14 @@ func solveNQueens(z []rune, x int, cnt *int) {
 		}
 		if valid {
 			z[x] = rune(i + '0')
-			solveNQueens(z, x+1, cnt)
+			solveNQueens(z, x+1, n)
 		}
 	}
 }
 
 func EightQueens() {
-	z := make([]rune, N+1)
-	z[N] = '\n' - 1
-	cnt := 0
-	solveNQueens(z, 0, &cnt)
+	n := 8
+	z := make([]rune, n+1)
+	z[n] = '\n' - 1
+	solveNQueens(z, 0, n)
 }
